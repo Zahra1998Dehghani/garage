@@ -207,6 +207,15 @@ RUN cd benchmarks && python setup.py sdist && \
     cp dist/*.tar.gz dist/benchmarks.tar.gz && \
     pip install dist/benchmarks.tar.gz
 
+# Install Python dependencies
+RUN pip install --upgrade pip
+RUN pip install \
+    mujoco-py \
+    torch==1.13.1+cu117 \
+    torchvision==0.14.1+cu117 \
+    torchaudio==0.13.1 \
+    --extra-index-url https://download.pytorch.org/whl/cu117    
+
 ENTRYPOINT ["docker/entrypoint-headless.sh"]
 
 # Nvidia Dev target ############################################################
